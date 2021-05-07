@@ -1,0 +1,51 @@
+.main {
+  background-color: none;
+}
+
+.header {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.detection {
+  text-align: center;
+  width: 200px;
+  padding: 30px 10px 30px 10px;
+
+  &.detected {
+    color: green;
+  }
+
+  &.undetected {
+    color: red;
+  }
+}
+
+.extractButton {
+  text-align: center;
+  background-color: wheat;
+  padding: 10px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: bisque;
+  }
+
+  &:active {
+    background-color: gray;
+  }
+
+  &.disabled {
+    background-color: gray;
+
+    &:hover {
+      cursor: default;
+      background-color: gray;
+    }
+
+    &:active {
+      background-color: gray;
+    }
+  }
+}

@@ -1,14 +1,17 @@
 import * as React from 'react';
 
-import Header from './header';
+import { Main } from './main';
 import styles from './styles.module.scss';
 
 class Popup extends React.Component {
   render() {
     return (
       <div className={styles.popup}>
-        <Header name="Playlist extractor"/>
-        popup
+        <Main
+          message="Vibe playlist is detected!"
+          isDetected
+          onExtract={() => console.log("extract")}
+        />
       </div>
     );
   }
