@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 
 type ButtonProps = {
   name: string;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLElement>) => void;
   isDisabled: boolean;
 };
 
@@ -20,7 +20,8 @@ function Button({ name, onClick, isDisabled } : ButtonProps) {
 }
 
 Button.defaultProps = {
-  isDisabled: false
+  isDisabled: false,
+  onClick: () => void(0),
 };
 
 export default Button;

@@ -1,5 +1,6 @@
-import Description from './detection';
+import Back from './back';
+import Description from './description';
 import Button from './button';
 import Header from './header';
 
-export {Header, Description, Button};
+export {Back, Button, Description, Header};

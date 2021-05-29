@@ -13,9 +13,15 @@ function Description({ message, isDisabled } : DescrptionProps) {
 
   return (
     <div className={cx(styles.descrption, messageClassName)}>
-      {message}
+      {
+        message.split("\n").map((m, i) => (<span key={i}>{m}<br/></span>))
+      }
     </div>
   );
 }
+
+Description.defaultProps = {
+  isDisabled: false
+};
 
 export default Description;

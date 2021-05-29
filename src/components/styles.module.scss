@@ -5,13 +5,20 @@
 }
 
 .descrption {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   width: 200px;
   padding: 30px 10px 30px 10px;
+  height: 40px;
   color: green;
 
+  & span {
+    text-align: center;
+  }
+
   &.disabled {
-    color: red;
+    color: grey;
   }
 }
 
@@ -40,5 +47,19 @@
     &:active {
       background-color: gray;
     }
+  }
+}
+
+.back {
+  padding: 10px;
+  border: 1px solid black;
+
+  &:hover {
+    cursor: pointer;
+    background-color: bisque;
+  }
+
+  &:active {
+    background-color: gray;
   }
 }
