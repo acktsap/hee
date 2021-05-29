@@ -1,8 +1,6 @@
 import * as React from 'react';
 
-import Header from './header';
-import Detection from './detection';
-import ExtractButton from './extract-button';
+import { Header, Description, Button } from '../components';
 import styles from './styles.module.scss';
 
 type MainProps = {
@@ -15,8 +13,8 @@ function Main({ message, isDetected, onExtract } : MainProps) {
   return (
     <div className={styles.main}>
       <Header name="Playlist extractor" />
-      <Detection message={message} isDetected={isDetected} />
-      <ExtractButton name="Extract" onClick={onExtract} isDisabled={!isDetected} />
+      <Description message={message} isDisabled={!isDetected} />
+      <Button name="Extract" onClick={onExtract} isDisabled={!isDetected} />
     </div>
   );
 }

@@ -3,24 +3,24 @@ import cx from 'classnames';
 
 import styles from './styles.module.scss';
 
-type ExtractButtonProps = {
+type ButtonProps = {
   name: string;
   onClick: () => void;
   isDisabled: boolean;
 };
 
-function ExtractButton({ name, onClick, isDisabled } : ExtractButtonProps) {
+function Button({ name, onClick, isDisabled } : ButtonProps) {
   const disabled = isDisabled ? styles.disabled : "";
 
   return (
-    <div className={cx(styles.extractButton, disabled)} onClick={onClick}>
+    <div className={cx(styles.button, disabled)} onClick={onClick}>
       {name}
     </div>
   );
 }
 
-ExtractButton.defaultProps = {
+Button.defaultProps = {
   isDisabled: false
 };
 
-export default ExtractButton;
+export default Button;

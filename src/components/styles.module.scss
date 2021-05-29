@@ -1,28 +1,21 @@
-.main {
-  background-color: none;
-}
-
 .header {
   text-align: center;
   padding: 10px;
   border: 1px solid black;
 }
 
-.detection {
+.descrption {
   text-align: center;
   width: 200px;
   padding: 30px 10px 30px 10px;
+  color: green;
 
-  &.detected {
-    color: green;
-  }
-
-  &.undetected {
+  &.disabled {
     color: red;
   }
 }
 
-.extractButton {
+.button {
   text-align: center;
   background-color: wheat;
   padding: 10px;

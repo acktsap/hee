@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Main } from './main';
+import { Main } from '../parts';
 import styles from './styles.module.scss';
 
 class Popup extends React.Component {
