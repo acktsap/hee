@@ -1,11 +1,13 @@
 import * as React from 'react';
 
 import { Main, Download } from '../parts';
+import { ProviderType } from '../extractors';
 import styles from './styles.module.scss';
 
 interface PopupProps {}
 
 interface PopupState {
+  providerType: ProviderType;
   extracted: boolean;
 }
 
@@ -14,18 +16,30 @@ class Popup extends React.Component<PopupProps, PopupState> {
     super(props);
 
     this.state = {
-      extracted: false
+      providerType: ProviderType.VIBE,
+      extracted: false,
     };
   }
 
+  componentDidMount() {
+    this.detectProvider();
+  }
+
   render() {
-    const { extracted } = this.state;
+    const { providerType, extracted } = this.state;
+
+    let provider = "No provider";
+    let detected = false;
+    if (providerType != ProviderType.INVALID) {
+      provider = providerType;
+      detected = true;
+    }
 
     let popup;
     if (!extracted) {
         popup = <Main
-          message="Vibe playlist is detected!"
-          isDetected
+          message={`${provider} is detected!`}
+          isDetected={detected}
           onExtract={() => this.onExtractClicked()}
         />;
     } else {
@@ -42,23 +56,30 @@ class Popup extends React.Component<PopupProps, PopupState> {
     );
   }
 
+  detectProvider() {
+    // TODO
+    this.setState({
+      providerType: ProviderType.VIBE
+    });
+  }
+
   onExtractClicked() {
+    // TODO
     this.setState({
       extracted: true
     });
-    // TODO
   }
 
   onBackClicked() {
+    // TODO
     this.setState({
       extracted: false
     });
-    // TODO
   }
 
   onDownloadClicked() {
-    console.log("download json");
     // TODO
+    console.log("download json");
   }
 }
 
