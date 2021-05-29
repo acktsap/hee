@@ -1,13 +1,14 @@
 import * as React from 'react';
 
 import { Main, Download } from '../parts';
-import { ProviderType } from '../extractors';
+import { Song, ProviderType } from '../extractors';
 import styles from './styles.module.scss';
 
 interface PopupProps {}
 
 interface PopupState {
   providerType: ProviderType;
+  songs: Song[];
   extracted: boolean;
 }
 
@@ -16,7 +17,8 @@ class Popup extends React.Component<PopupProps, PopupState> {
     super(props);
 
     this.state = {
-      providerType: ProviderType.VIBE,
+      providerType: ProviderType.INVALID,
+      songs: [],
       extracted: false,
     };
   }
@@ -56,24 +58,50 @@ class Popup extends React.Component<PopupProps, PopupState> {
     );
   }
 
-  detectProvider() {
-    // TODO
-    this.setState({
-      providerType: ProviderType.VIBE
-    });
+  async detectProvider() {
+    const tabs = await browser.tabs.query({active: true, currentWindow: true});
+
+    const tab = tabs[0];
+    if (tab.id != undefined && tab.url != undefined) {
+      const request = {
+        command: "detect",
+        url: tab.url,
+      };
+      const providerType = await browser.tabs.sendMessage<any, ProviderType>(tab.id, request);
+
+      if (providerType !== undefined) {
+        this.setState({
+          providerType: providerType,
+        });
+      }
+    }
   }
 
-  onExtractClicked() {
-    // TODO
-    this.setState({
-      extracted: true
-    });
+  async onExtractClicked() {
+    const tabs = await browser.tabs.query({active: true, currentWindow: true});
+
+    const tab = tabs[0];
+    if (tab.id != undefined && tab.url != undefined) {
+      const request = {
+        command: "extract",
+        type: this.state.providerType,
+        url: tab.url,
+      };
+      const songs = await browser.tabs.sendMessage<any, Song[]>(tab.id, request);
+
+      if (songs !== undefined) {
+        this.setState({
+          extracted: true,
+          songs: songs,
+        });
+      }
+    }
   }
 
   onBackClicked() {
-    // TODO
     this.setState({
-      extracted: false
+      extracted: false,
+      songs: [],
     });
   }
 
