@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "playlist extractor",
-  "description": "A playlist extractor for naver vibe.",
+  "name": "hee",
+  "description": "A playlist extractor for naver vibe",
   "version": "0.1.0",
   "icons": {
     "32": "icons/beasts-30.png"

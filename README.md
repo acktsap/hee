@@ -1,6 +1,6 @@
-# Playlist Extractor
+# Hee
 
-A playlist extractor for [NAVER VIBE](https://vibe.naver.com/).
+A playlist extractor for [NAVER VIBE](https://vibe.naver.com/)
 
 ## Download
 

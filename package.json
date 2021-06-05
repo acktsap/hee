@@ -1,7 +1,7 @@
 {
-  "name": "react-typescript-browser-extension",
+  "name": "hee",
   "version": "0.1.0",
-  "description": "react-typescript-browser-extension",
+  "description": "A playlist extractor for naver vibe",
   "scripts": {
     "start": "yarn run start:firefox",
     "start:firefox": "webpack -w --env target=firefox --mode=production",

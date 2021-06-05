@@ -12,7 +12,7 @@ type MainProps = {
 function Main({ message, isDetected, onExtract } : MainProps) {
   return (
     <div className={styles.main}>
-      <Header name="Playlist extractor" />
+      <Header name="Hee" />
       <Description message={message} isDisabled={!isDetected} />
       <Button name="Extract" onClick={onExtract} isDisabled={!isDetected} />
     </div>
