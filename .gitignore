@@ -6,6 +6,3 @@ build/
 
 # distribution
 dist/
-
-# should not be ignored in real project
-yarn.lock 
