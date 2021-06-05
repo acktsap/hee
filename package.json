@@ -4,10 +4,10 @@
   "description": "A playlist extractor for naver vibe",
   "scripts": {
     "start": "yarn run start:firefox",
-    "start:firefox": "webpack -w --env target=firefox --mode=production",
-    "start:chrome": "webpack -w --env target=chrome --mode=production",
+    "start:firefox": "yarn run lint && webpack -w --env target=firefox --mode=production",
+    "start:chrome": "yarn run lint && webpack -w --env target=chrome --mode=production",
     "lint": "eslint ./src --fix",
-    "build": "webpack --mode=production",
+    "build": "yarn run lint && webpack --mode=production",
     "package": "yarn run build && web-ext build -s build --overwrite-dest -a dist"
   },
   "repository": {
