@@ -1,22 +1,23 @@
 import { detectProvider, createExtractor } from '../extractors';
 
-// FIXME: 이렇게 하는게 최선은 아닌거 같음
-browser.runtime.onMessage.addListener((request: any, sender: any, response: any) => {
+// FIXME: remove any
+
+async function dispatchRequest(request: any): Promise<any> {
+  let result;
+
   if (request.command === "detect") {
-    const url = request.url;
-    const providerType = detectProvider(url);
-
-    response(providerType);
+    result = detectProvider(request.url);
   } else if (request.command === "extract") {
-    const type = request.type;
-    const url = request.url;
-
-    const extractor = createExtractor(type);
-    const songs = extractor.extract(url);
-
-    response(songs);
+    const extractor = createExtractor(request.type);
+    result = await extractor.extract(request.url);
   } else {
-    console.error("Invalid command " + request.command);
+    throw new Error("Invalid command " + request.command);
   }
 
+  return result;
+}
+
+browser.runtime.onMessage.addListener((request: any, sender: any, response: any) => {
+  const result = (async () => await dispatchRequest(request))();
+  response(result);
 });

@@ -108,7 +108,7 @@ class Popup extends React.Component<PopupProps, PopupState> {
 
   onDownloadClicked() {
     // TODO
-    console.log("download json");
+    console.log("download json", this.state.songs);
   }
 }
 

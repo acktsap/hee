@@ -1,15 +1,14 @@
 import { Extractor, ProviderType } from "../models";
 
-import { VibeExtractor, vibeWhiteList } from "./vibe-extractor";
+import { vibeWhiteList, VibeExtractor } from "./vibe";
 
 const vibeList: Array<[string, ProviderType]> = vibeWhiteList.map(it => [it, ProviderType.VIBE]);
-
-const urlToProvider = new Map<string, ProviderType>([
+const whiteListToProvider = new Map<string, ProviderType>([
   ...vibeList,
 ]);
 
 function detectProvider(url: string): ProviderType {
-  for (const [whitelist, type] of urlToProvider) {
+  for (const [whitelist, type] of whiteListToProvider) {
     if (url.match(whitelist)) {
       return type;
     }

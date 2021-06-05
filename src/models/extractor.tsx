@@ -5,7 +5,7 @@ interface Song {
 }
 
 interface Extractor {
-  extract(url: string): Array<Song>
+  extract(url: string): Promise<Song[]>
 }
 
 export type { Song, Extractor };
