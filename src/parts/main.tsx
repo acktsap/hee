@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { Header, Description, Button } from '../components';
+
 import styles from './styles.module.scss';
 
 type MainProps = {

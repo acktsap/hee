@@ -8,4 +8,4 @@ interface Extractor {
   extract(url: string): Array<Song>
 }
 
-export type {Song, Extractor};
+export type { Song, Extractor };

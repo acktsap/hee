@@ -1,15 +1,11 @@
-import { Extractor } from "./extractor";
-import VibeExtractor from "./vibe-extractor";
+import { Extractor, ProviderType } from "../models";
 
-enum ProviderType {
-  INVALID = "No provider",
-  VIBE = "Naver Vibe",
-}
+import { VibeExtractor, vibeWhiteList } from "./vibe-extractor";
+
+const vibeList: Array<[string, ProviderType]> = vibeWhiteList.map(it => [it, ProviderType.VIBE]);
 
 const urlToProvider = new Map<string, ProviderType>([
-  ["https://vibe.naver.com/library/tracks", ProviderType.VIBE], // 보관함 -> 노래
-  ["https://vibe.naver.com/mylist", ProviderType.VIBE], // 보관함 -> 플레이리스트 -> custom list
-  ["https://vibe.naver.com/playlist", ProviderType.VIBE], // 보관함 -> 플레이리스트 -> vibe list
+  ...vibeList,
 ]);
 
 function detectProvider(url: string): ProviderType {
@@ -30,4 +26,4 @@ function createExtractor(type: ProviderType): Extractor {
   }
 }
 
-export {ProviderType, detectProvider, createExtractor};
+export { detectProvider, createExtractor };

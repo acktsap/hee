@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 import { Main, Download } from '../parts';
-import { Song, ProviderType } from '../extractors';
+import { Song, ProviderType } from '../models';
+
 import styles from './styles.module.scss';
 
 interface PopupProps {}
