@@ -1,11 +1,7 @@
-interface Song {
-  title: string;
-  artist: string;
-  album: string;
-}
+import { Song } from './song';
 
 interface Extractor {
   extract(url: string): Promise<Song[]>
 }
 
-export type { Song, Extractor };
+export type { Extractor };
