@@ -1,9 +1,10 @@
 import * as React from 'react';
 
 import { Main, Download } from '../parts';
-import { Song, ProviderType } from '../models';
+import { Song, ProviderType, FormatterType } from '../models';
 
 import styles from './styles.module.scss';
+import { createFormatter } from '../formatters';
 
 interface PopupProps {}
 
@@ -107,8 +108,15 @@ class Popup extends React.Component<PopupProps, PopupState> {
   }
 
   onDownloadClicked() {
-    // TODO
-    console.log("download json", this.state.songs);
+    const formatter = createFormatter(FormatterType.CSV);
+    const blob = formatter.format(this.state.songs);
+
+    const downloadLink = document.createElement("a");
+    downloadLink.href = URL.createObjectURL(blob);
+    downloadLink.download = "playlist.csv";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   }
 }
 
