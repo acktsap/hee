@@ -1,7 +1,7 @@
 import { Song, Extractor } from '../../models';
 
 import { parseResponse } from './decoder';
-import type { VibeResponse } from './vibe-model';
+import type { CustomListAllResponse } from './vibe-model';
 
 // 보관함 -> 플레이리스트 -> custom list
 const targetUrl = "https://vibe.naver.com/mylist";
@@ -19,7 +19,6 @@ class CustomListExtractor implements Extractor {
 
     // TODO: elegant parsing
     const listId = url.substring(targetUrl.length);
-
     let start = 1;
     while (true) {
       const response = await this.request(listId, start);
@@ -28,7 +27,7 @@ class CustomListExtractor implements Extractor {
 
       const reader = body.getReader();
       const result = await parseResponse(reader);
-      const vibeResponse: VibeResponse = JSON.parse(result);
+      const vibeResponse: CustomListAllResponse = JSON.parse(result);
 
       const tracks = vibeResponse.response.result.tracks;
       if (tracks.length === 0) {

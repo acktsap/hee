@@ -15,7 +15,6 @@ const extractors = new Map<string, Extractor>(
 class VibeExtractor implements Extractor {
 
   async extract(url: string): Promise<Song[]> {
-    console.log("VibeExtractor extract " + url);
     for (const [whiteList, extractor] of extractors) {
       if (url.match(whiteList.toString())) {
         return extractor.extract(url);

@@ -1,17 +1,43 @@
-interface VibeResponse {
-  response: Response;
+// custom playlist
+
+interface CustomListAllResponse {
+  response: CustomListResponse;
 }
 
-interface Response {
-  result: Result;
+interface CustomListResponse {
+  result: CustomListResult;
 }
 
-interface Result {
+interface CustomListResult {
   trackTotalCount: number;
   statusDownload: "ALL";
   statusStreaming: "ALL";
   tracks: Track[]
 }
+
+
+// vibe playlist
+
+interface VibeListAllResponse {
+  response: VibeListResponse;
+}
+
+interface VibeListResponse {
+  result: VibeListResult;
+}
+
+interface VibeListResult {
+  playlist: PlayList;
+}
+
+interface PlayList {
+  title: string;
+  sub: string;
+  tracks: Track[]
+}
+
+
+// common
 
 interface Track {
   trackTitle: string;
@@ -29,9 +55,14 @@ interface Album {
 }
 
 export type {
-  VibeResponse,
-  Response,
-  Result,
+  CustomListAllResponse,
+  CustomListResponse,
+  CustomListResult,
+
+  VibeListAllResponse,
+  VibeListResponse,
+  VibeListResult,
+
   Track,
   Artist,
   Album,

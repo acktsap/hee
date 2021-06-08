@@ -1,7 +1,7 @@
 import { Song, Extractor } from '../../models';
 
 import { parseResponse } from './decoder';
-import type { VibeResponse } from './vibe-model';
+import type { CustomListAllResponse } from './vibe-model';
 
 // 보관함 -> 노래
 const targetUrl = "https://vibe.naver.com/library/tracks";
@@ -25,7 +25,7 @@ class LikedListExtractor implements Extractor {
 
       const reader = body.getReader();
       const result = await parseResponse(reader);
-      const vibeResponse: VibeResponse = JSON.parse(result);
+      const vibeResponse: CustomListAllResponse = JSON.parse(result);
 
       const tracks = vibeResponse.response.result.tracks;
       if (tracks.length === 0) {
