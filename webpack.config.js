@@ -84,7 +84,7 @@ const baseConfigs = {
 const configFirefox = (configs) => {
   const webExtPlugin = new WebExtPlugin({
     sourceDir: path.resolve(__dirname, 'build'), // web-ext --source-dir
-    startUrl: "https://duckduckgo.com", // web-ext --start-url
+    startUrl: "https://vibe.naver.com/library/tracks", // web-ext --start-url
     browserConsole: true, // web-ext --browser-console
     target: "firefox-desktop" // web-ext --target
   });
@@ -95,7 +95,7 @@ const configFirefox = (configs) => {
 const configChrome = (configs) => {
   const webExtPlugin = new WebExtPlugin({
     sourceDir: path.resolve(__dirname, 'build'),
-    startUrl: "https://duckduckgo.com",
+    startUrl: "https://vibe.naver.com/library/tracks",
     browserConsole: true,
     target: "chromium"
   });
