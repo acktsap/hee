@@ -1,3 +1,3 @@
-import { detectProvider, createExtractor } from './extractor-creator';
+import { detectProvider, createExtractor } from './extractor-factory';
 
 export { detectProvider, createExtractor };
