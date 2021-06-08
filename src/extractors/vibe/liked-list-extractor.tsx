@@ -1,15 +1,20 @@
 import { Song, Extractor } from '../../models';
 
+import { parseResponse } from './decoder';
 import type { VibeResponse } from './vibe-model';
 
 // 보관함 -> 노래
-const targetUrl = "https://vibe.naver.com/library/tracks"; 
-const apiUrl = "https://apis.naver.com/vibeWeb/musicapiweb/myMusic/myLike/tracks";
+const targetUrl = "https://vibe.naver.com/library/tracks";
+const apiBaseUrl = "https://apis.naver.com/vibeWeb/musicapiweb/myMusic/myLike/tracks";
 const displaySize = 100;
 
 class LikedListExtractor implements Extractor {
 
   async extract(url: string): Promise<Song[]> {
+    if (!url.match(targetUrl)) {
+      throw new Error(`Url is not match (expected: ${targetUrl}, actual: ${url}`);
+    }
+
     const allSongs: Song[] = [];
 
     let start = 1;
@@ -19,7 +24,7 @@ class LikedListExtractor implements Extractor {
       const body = response.body ?? (() => { throw new Error(`No body (response code: ${response.status})`); })();
 
       const reader = body.getReader();
-      const result = await this.parseResponse(reader);
+      const result = await parseResponse(reader);
       const vibeResponse: VibeResponse = JSON.parse(result);
 
       const tracks = vibeResponse.response.result.tracks;
@@ -30,7 +35,7 @@ class LikedListExtractor implements Extractor {
       start += tracks.length;
 
       const songs: Song[] = tracks.map(it => {
-        return { 
+        return {
           title: it.trackTitle,
           artist: it.artists[0].artistName,
           album: it.album.albumTitle,
@@ -43,12 +48,13 @@ class LikedListExtractor implements Extractor {
   }
 
   private async request(start: number): Promise<globalThis.Response> {
-    const fullUrl = apiUrl + "?" + new URLSearchParams([
+    const params = new URLSearchParams([
       ["start", start.toString()],
       ["display", displaySize.toString()],
     ]);
 
-    const response = await fetch(fullUrl, {
+    const requestUrl = `${apiBaseUrl}?${params}`;
+    const response = await fetch(requestUrl, {
         credentials: "include",
         headers: {
           "Accept": "application/json",
@@ -61,22 +67,6 @@ class LikedListExtractor implements Extractor {
     return response;
   }
 
-  private async parseResponse(reader: ReadableStreamDefaultReader): Promise<string> {
-    let result = "";
-
-    const decoder = new TextDecoder();
-    while (true) {
-      const rawResponse = await reader.read();
-      if (rawResponse.done) {
-        break;
-      }
-
-      const decoded = decoder.decode(rawResponse.value);
-      result += decoded;
-    }
-
-    return result;
-  }
 }
 
 export { targetUrl as likedListTargetUrl, LikedListExtractor };
