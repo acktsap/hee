@@ -17,7 +17,7 @@ async function dispatchRequest(request: any): Promise<any> {
   return result;
 }
 
-browser.runtime.onMessage.addListener((request: any, sender: any, response: any) => {
+browser.runtime.onMessage.addListener((request: any) => {
   const result = (async () => await dispatchRequest(request))();
-  response(result);
+  return result;
 });

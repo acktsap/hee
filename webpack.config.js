@@ -12,7 +12,7 @@ const WebExtPlugin = require('web-ext-plugin')
 
 const baseConfigs = {
   entry: {
-    content: path.resolve(__dirname, './src/content_scripts'),
+    background: path.resolve(__dirname, './src/background_scripts'),
     popup: path.resolve(__dirname, './src/popup'),
   },
   module: {
@@ -72,6 +72,9 @@ const baseConfigs = {
           globOptions: {
             ignore: ['*.js', '*.ts', '*.tsx'],
           },
+        },
+        {
+          from: 'node_modules/webextension-polyfill/dist/browser-polyfill.min.js',
         },
       ],
     }),
