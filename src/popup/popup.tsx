@@ -69,7 +69,7 @@ class Popup extends React.Component<PopupProps, PopupState> {
         command: "detect",
         url: tab.url,
       };
-      const providerType = await browser.tabs.sendMessage<any, ProviderType>(tab.id, request);
+      const providerType = await browser.runtime.sendMessage<any, ProviderType>(request);
 
       if (providerType !== undefined) {
         this.setState({
@@ -89,7 +89,7 @@ class Popup extends React.Component<PopupProps, PopupState> {
         type: this.state.providerType,
         url: tab.url,
       };
-      const songs = await browser.tabs.sendMessage<any, Song[]>(tab.id, request);
+      const songs = await browser.runtime.sendMessage<any, Song[]>(request);
 
       if (songs !== undefined) {
         this.setState({
