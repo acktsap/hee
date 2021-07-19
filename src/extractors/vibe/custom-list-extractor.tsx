@@ -59,7 +59,7 @@ class CustomListExtractor implements Extractor {
     const response = await fetch(requestUrl, {
         credentials: "include",
         headers: {
-          "Accept": "application/json",
+          "Accept": "application/json; charset=utf-8"
         },
         method: "GET",
         mode: "cors",
